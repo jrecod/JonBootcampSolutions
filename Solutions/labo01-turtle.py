@@ -1,5 +1,4 @@
 from turtle import *
-
 circle(60)
 right(90)
 forward(50)
