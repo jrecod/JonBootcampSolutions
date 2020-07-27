@@ -36,4 +36,5 @@ Someone's in the kitchen i know
 Someone's in the kitchen with {name}
 Strumming on the old {stringinstrument}'''
 
+#prints madlib
 print(message)
