@@ -1,0 +1,20 @@
+
+body {
+    background-image: url(https://i.pinimg.com/originals/38/02/25/380225d78c13da847257aa75c34ed880.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: seagreen;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+header{
+    justify-content: center;
+    display:flex;
+    color: goldenrod;
+    background-color:rgb(81, 1, 138, 1)
+}
+.articles {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding:20px;
+    margin: 0 100px 20px 100px;
+    
+}
