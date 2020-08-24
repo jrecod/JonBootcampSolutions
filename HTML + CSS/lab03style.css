@@ -1,0 +1,24 @@
+body{
+
+    background-image: url("lab03\ photos/Background\ photo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: darkgreen;     
+}
+
+.carousel img{
+    width: 500px;
+
+}
+.carousel-caption{
+    color: blanchedalmond;
+    background-color: rgba(70, 63, 63, 0.472)
+    
+}
+.bg-light{
+    background-color: blue;
+}
+.articles {
+    color: blanchedalmond;
+
+}
