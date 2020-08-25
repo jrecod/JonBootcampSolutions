@@ -22,3 +22,14 @@ body{
     color: blanchedalmond;
 
 }
+footer{
+    color:blanchedalmond;
+}
+a:link{
+    color:blanchedalmond
+}
+a:visited {
+    color: red;
+    background-color: transparent;
+    text-decoration: none;
+  }
