@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Numbers to Words.</h1>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <label for="num">Enter number to be converted.</label>
+                <input type="number" class="form-control" id="num">
+            </div>
+            <div class="col">
+                <label>&nbsp;</label><br />
+                <button id="btn_convert" class="btn btn-primary">Convert</button>
+            </div>
+        </div>
+        <div class="row">
+            <pre id="pre_output">
+            </pre>
+        </div>
+    </div>
+    <script>
+        let input_num = document.querySelector('#num')
+        let pre_output = document.querySelector('#pre_output')
+        btn_convert.addEventListener('click', function () {
+            let num = input_num.value
+
+            let d = {
+                0: '', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
+                6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 10: 'ten', 11: 'elevin',
+                12: 'twelve', 13: 'thirteen', 14: 'fourteen', 15: 'fifteen', 16: 'sixteen', 17: 'seventeen', 18: 'eighteen', 19: 'nineteen'
+            }
+
+            let d2 = {
+                2: 'twenty', 3: 'thirty', 4: 'fourty', 5: 'fifty', 6: 'sixty',
+                7: 'seventy', 8: 'eighty', 9: 'ninety', 0: ''
+            }
+
+            let d3 = {
+                1: 'one hundred', 2: 'two hundred', 3: 'three hundred', 4: 'four hundred', 5: 'five hundred', 6: 'six hundred', 7: 'seven hundred', 8: 'eight hundred', 9: 'nine hundred'
+            }
+
+            if (num == 0) {
+                pre_output.innerText = 'Zero'
+            } else if (num < 20) {
+                pre_output.innerText = d[num]
+            } else if (num >= 20 & num <= 99) {
+                pre_output.innerText = d2[Math.floor(num / 10)] + ' ' + d[num % 10]
+            } else if (num >= 100) {
+                let hundreds = Math.floor(num / 100)
+                let tens = Math.floor(num / 10) % 10
+                let ones = num % 10
+                if (tens == 1) {
+                    pre_output.innerText = d3[hundreds] + ' ' + d[10 * tens + ones]
+                } else {
+                    pre_output.innerText = d3[hundreds] + ' ' + d2[tens] + ' ' + d[ones]
+                }
+            }
+        })
+            //else if (num / 10 % 10 == 1) {
+            //pre_output.innerText = d3[Math.floor(num / 100)] + d[num % 100]
+            //}
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
