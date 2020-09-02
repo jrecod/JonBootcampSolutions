@@ -1,6 +1,6 @@
 
 body {
-    background-image: url(https://i.pinimg.com/originals/38/02/25/380225d78c13da847257aa75c34ed880.jpg);
+    background-image: url("https://i.pinimg.com/originals/38/02/25/380225d78c13da847257aa75c34ed880.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     color: seagreen;
