@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Number to Phrase</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
@@ -13,26 +13,26 @@
     <div class="container">
         <div class="row">
             <h1>Numbers to Words.</h1>
-            <hr />
         </div>
+        <hr>
         <div class="row">
             <div class="col form-group">
                 <label for="num">Enter number to be converted.</label>
                 <input type="number" class="form-control" id="num">
             </div>
             <div class="col">
-                <label>&nbsp;</label><br />
+                <label>&nbsp;</label><br>
                 <button id="btn_convert" class="btn btn-primary">Convert</button>
             </div>
         </div>
         <div class="row">
-            <pre id="pre_output">
-            </pre>
+            <div id="output">
+            </div>
         </div>
     </div>
     <script>
         let input_num = document.querySelector('#num')
-        let pre_output = document.querySelector('#pre_output')
+        let output = document.querySelector('#output')
         btn_convert.addEventListener('click', function () {
             let num = input_num.value
 
@@ -52,26 +52,22 @@
             }
 
             if (num == 0) {
-                pre_output.innerText = 'Zero'
+                output.innerText = 'Zero'
             } else if (num < 20) {
-                pre_output.innerText = d[num]
-            } else if (num >= 20 & num <= 99) {
-                pre_output.innerText = d2[Math.floor(num / 10)] + ' ' + d[num % 10]
+                output.innerText = d[num]
+            } else if (num <= 99) {
+                output.innerText = d2[Math.floor(num / 10)] + ' ' + d[num % 10]
             } else if (num >= 100) {
                 let hundreds = Math.floor(num / 100)
                 let tens = Math.floor(num / 10) % 10
                 let ones = num % 10
                 if (tens == 1) {
-                    pre_output.innerText = d3[hundreds] + ' ' + d[10 * tens + ones]
+                    output.innerText = d3[hundreds] + ' ' + d[10 * tens + ones]
                 } else {
-                    pre_output.innerText = d3[hundreds] + ' ' + d2[tens] + ' ' + d[ones]
+                    output.innerText = d3[hundreds] + ' ' + d2[tens] + ' ' + d[ones]
                 }
             }
         })
-            //else if (num / 10 % 10 == 1) {
-            //pre_output.innerText = d3[Math.floor(num / 100)] + d[num % 100]
-            //}
-
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
