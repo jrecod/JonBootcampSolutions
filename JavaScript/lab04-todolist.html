@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+
+    </style>
+    <title>To-do List</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>To-do List</h1>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col form-group">
+                <label for="task">Enter a task.</label>
+                <input type="text" class="form-control" id="input_task">
+            </div>
+            <div class="col">
+                <label>&nbsp;</label><br>
+                <button id="add_btn" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+        <div class="row">
+            <div id="todo_containter">
+            </div>
+        </div>
+        <script>
+            let input_task = document.querySelector('#input_task')
+            let add_btn = document.querySelector('#add_btn')
+            let todo_container = document.querySelector('#todo_containter')
+            // todo_container.innerText = 'hello world!'
+            add_btn.addEventListener('click', function () {
+                let task = input_task.value
+                let div = document.createElement('div')
+                let span = document.createElement('span')
+                let complete_btn = document.createElement('button')
+                let clear_btn = document.createElement('button')
+                complete_btn.innerText = 'Complete'
+                clear_btn.innerText = 'Clear'
+                div.innerText = task
+                todo_container.appendChild(div)
+                div.appendChild(span)
+                span.appendChild(complete_btn)
+                span.appendChild(clear_btn)
+
+
+
+
+            })
+            clear_btn.addEventListener('click' function(){
+
+            })
+            complete_btn.addEventListener('click' function(){
+                
+            })
+        </script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
