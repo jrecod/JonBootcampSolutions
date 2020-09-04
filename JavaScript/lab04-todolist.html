@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
-
+        .line-through{
+            text-decoration: line-through;
+        }
     </style>
     <title>To-do List</title>
 </head>
@@ -31,38 +33,49 @@
                 <button id="add_btn" class="btn btn-primary">Add</button>
             </div>
         </div>
-        <div class="row">
-            <div id="todo_containter">
+        <div class="container">
+            <div class="row">
+                <div id="todo_container" class="col">
+                </div>
+                <div id="list_buttons" class="col-2">
+                </div>
+              </div>
             </div>
         </div>
         <script>
             let input_task = document.querySelector('#input_task')
             let add_btn = document.querySelector('#add_btn')
-            let todo_container = document.querySelector('#todo_containter')
+            let todo_container = document.querySelector('#todo_container')
             // todo_container.innerText = 'hello world!'
             add_btn.addEventListener('click', function () {
-                let task = input_task.value
+                let task = input_task
                 let div = document.createElement('div')
                 let span = document.createElement('span')
                 let complete_btn = document.createElement('button')
                 let clear_btn = document.createElement('button')
                 complete_btn.innerText = 'Complete'
+                complete_btn.classList.add("btn-success")
                 clear_btn.innerText = 'Clear'
-                div.innerText = task
+                clear_btn.classList.add("btn-danger")
+                div.innerText = task.value
                 todo_container.appendChild(div)
                 div.appendChild(span)
-                span.appendChild(complete_btn)
-                span.appendChild(clear_btn)
+                list_buttons.appendChild(complete_btn)
+                list_buttons.appendChild(clear_btn)
+                complete_btn.addEventListener('click', function(){
+                    console.log(div)
+                   div.classList.add("line-through")
+                })
 
+                clear_btn.addEventListener('click', function(){
+                    todo_container.removeChild(div)
+                    list_buttons.removeChild(complete_btn)
+                    list_buttons.removeChild(clear_btn)
+                })
 
-
-
-            })
-            clear_btn.addEventListener('click' function(){
-
-            })
-            complete_btn.addEventListener('click' function(){
                 
+
+
             })
         </script>
         <!-- Optional JavaScript -->
