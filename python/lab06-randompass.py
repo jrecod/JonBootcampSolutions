@@ -9,7 +9,6 @@ password_characters = string.ascii_lowercase + string.ascii_uppercase + string.p
 
 password_characters = list(password_characters)
 
-print(random.choice(password_characters))
 
 # string to integer 
 length = int(input('How long would you like your random password to be?: '))

@@ -1,13 +1,13 @@
 let start_btn = document.querySelector("#start_btn")
 let RPS_Options = document.querySelector("#RPS_Options")
 let output_div = document.querySelector("#output_div")
+function randomElement(arr) {
+    return arr[Math.floor(Math.random()*arr.length)]
+}
 start_btn.addEventListener('click', function() {
     let player_choice = RPS_Options.value
     let rps_choice = ['Rock', 'Paper', 'Scissors']
-
-    function randomElement(arr) {
-        return arr[Math.floor(Math.random()*arr.length)]
-    }
+    
     // console.log(rps_choice)
 
     let computer_choice= randomElement(rps_choice)

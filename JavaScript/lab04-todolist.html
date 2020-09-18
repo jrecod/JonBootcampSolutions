@@ -54,9 +54,11 @@
                 let complete_btn = document.createElement('button')
                 let clear_btn = document.createElement('button')
                 complete_btn.innerText = 'Complete'
+                complete_btn.classList.add('btn')//fix the formatting
                 complete_btn.classList.add("btn-success")
                 clear_btn.innerText = 'Clear'
                 clear_btn.classList.add("btn-danger")
+                clear_btn.classList.add('btn')//fix the formatting
                 div.innerText = task.value
                 todo_container.appendChild(div)
                 div.appendChild(span)

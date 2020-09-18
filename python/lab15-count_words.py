@@ -10,9 +10,11 @@ def clean_text(dirty_text):
     4. Convert the text into a list of words
     Return a list of lower case words with no punctuation or whitespace
     
-    How now, Brown Cow? = ['how', 'now', 'brown', 'cow]
+    How now, Brown Cow? = ['how', 'now', 'brown', 'cow']
     '''
+    # make dirty text a variable.
     book = dirty_text
+    # Defining the characters I want deleted, including white space.
     deleted_char = ':;1234567890!@#$%^&*()-_=+[]/?.," '
     replaced_char = ' ' * len(deleted_char)
     table = str.maketrans(deleted_char, replaced_char)
@@ -20,7 +22,7 @@ def clean_text(dirty_text):
     clean_text = stripped_book.lower().split()
     return clean_text
     
-
+# taking words and add them to the dictionary and counts them.
 def wordfreq(words):
     wordfreq = {}
     for w in words:
@@ -31,7 +33,6 @@ def wordfreq(words):
     return wordfreq
 response = requests.get('http://www.gutenberg.org/cache/epub/17192/pg17192.txt')
 words = clean_text(response.text)
-# print(words)
 counts = wordfreq(words)
 
 words = list(counts.items()) # .items() returns a list of tuples
