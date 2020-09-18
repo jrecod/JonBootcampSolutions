@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Axios.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"
+        integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg=="
+        crossorigin="anonymous"></script>
+
+    <title>Jon's Quiz!</title>
+</head>
+
+<body>
+    <h1>Quiz!</h1>
+    <div id="app">
+        <!-- html goes here -->
+        <div v-for="(question, index) in questions">
+            <span v-html="question.question"></span>
+            <div v-for="(answer, index_answer) in question.answers">
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio"
+                        v-bind:id="'question' + index + '_answer' + index_answer" v-bind:value="answer"
+                        v-model="question.selected_answer" :disabled="question.submitted">
+                    <label class="form-check-label" v-bind:for="'question' + index + '_answer' + index_answer"
+                        v-html="answer.text"></label>
+                </div>
+            </div>
+        </div>
+        <div><button type="button" class="btn btn-primary btn-sm" id="check_answer" v-on:click="checkAnswers">
+                Check Answers
+            </button></div>
+    </div>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                questions: [],
+            },
+            methods: {
+                checkAnswers: function () {
+                    alert("check")
+                },
+                randAnswer: function () {
+                    //1. iterate over questions array
+                    //2. for each question, iterate over the answers
+                    //3. shuffle answers
+                    // for (let i = 0; i < this.questions.length; ++i){
+                    //     for (let i = 0; i < this.questions.length; ++i)
+                    // }
+                    //~~~~~~~VVVVV Does not work VVVVV~~~~~~~
+                    // for (let i = 0; i < this.questions.length; ++i) {
+                    //     let arr = this.questions[i].answers
+                    //     let q = Math.floor(Math.random() * arr.length)
+
+                    //     let temp = arr[i]
+                    //     arr[i] = arr[q]
+                    //     arr[q] = temp
+                    // }
+                },
+                getQuiz: function () {
+                    axios({
+                        method: 'get',
+                        url: 'https://opentdb.com/api.php',
+                        params: {
+                            amount: 10,
+                            category: 18,
+                            difficulty: 'easy',
+                            type: 'multiple'
+                        }
+                    }).then(response => {
+                        let questions = response.data.results
+                        // console.log(questions)
+                        for (let i = 0; i < questions.length; ++i) {
+                            const temp_question = {}
+                            let category = questions[i].category
+                            let type = questions[i].type
+                            let difficulty = questions[i].difficulty
+                            let question = questions[i].question
+                            let answers = [
+                                {
+                                    text: questions[i].correct_answer,
+                                    correct: true
+                                },
+                                {
+                                    text: questions[i].incorrect_answers[0],
+                                    correct: false
+                                },
+                                {
+                                    text: questions[i].incorrect_answers[1],
+                                    correct: false
+                                },
+                                {
+                                    text: questions[i].incorrect_answers[2],
+                                    correct: false
+                                },
+                            ]
+                            temp_question.category = category
+                            temp_question.type = type
+                            temp_question.difficulty = difficulty
+                            temp_question.question = question
+                            temp_question.answers = answers
+                            temp_question.selected_answer = null
+                            temp_question.submitted = false
+                            this.questions.push(temp_question)
+                        }
+                        // this.randAnswer()
+                        console.log(JSON.parse(JSON.stringify(this.questions)))
+                        // console.log(this.questions.answers)
+                        // console.log(this.questions)
+                        // console.log(this.questions[0].incorrect_answers)
+                        // console.log(this.questions[0].correct_answer)
+                    })
+                }
+            },
+            created: function () {
+                this.getQuiz()
+            }
+        })
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+<!-- 3. populate questions and answers together (use nested v-for) -->
