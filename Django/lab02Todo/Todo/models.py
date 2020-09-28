@@ -3,7 +3,7 @@ from django.db import models
 
 class TodoItem(models.Model):
     task = models.CharField(max_length=200)
-    created_date = models.DateTimeField('date created')
+    created_date = models.DateTimeField('date created', null=True, blank=True)
     completed_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
