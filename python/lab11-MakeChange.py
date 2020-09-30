@@ -1,15 +1,15 @@
 change = [
         #0           #1
-    ['half-dollar', 50], #0
-    ['quarter', 25], #1
-    ['dime', 10], #2
+    ('half-dollar', 50), #0
+    ('quarter', 25), #1
+    ('dime', 10), #2
     ('nickel', 5), #3
     ('penny', 1)
     ]
 
 
-print(change[2
-print(change[2][0])
+# print(change[2])
+# print(change[2][0])
 change = (50, 25, 10, 5, 1)
 q = 25
 d = 10
