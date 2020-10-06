@@ -14,8 +14,11 @@
     <title>Pokedex</title>
     <style>
         td,
-        th {
+        th,  {
             vertical-align: middle !important;
+        }
+        ul {
+            justify-content: center;
         }
     </style>
 </head>
@@ -23,13 +26,15 @@
 <body>
     <div class="container">
         <h1>Pokedex</h1>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Pokemon Name" aria-label="Pokemon Name"
-                aria-describedby="button-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-dark" type="button" id="button-addon2">Search</button>
+        <form action="{% url 'pokedex:index' %}" method="get">
+            <div class="input-group mb-3">
+                <input name="search" type="text" class="form-control" placeholder="Pokemon Name"
+                    aria-label="Pokemon Name" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-dark" type="submit" id="button-addon2">Search</button>
+                </div>
             </div>
-        </div>
+        </form>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -41,20 +46,42 @@
                 </tr>
             </thead>
             <tbody>
-                {% for pokemon in pokemons %}
+                {% for each_pokemon in pokemon %}
                 <tr>
-                    <th scope="row">{{ pokemon.number }}</th>
-                    <td>{{ pokemon.name }}</td>
-                    <td>{% for type in pokemon.types.all %}{{ type.name }} {%if not forloop.last %}/
+                    <th scope="row">{{ each_pokemon.number }}</th>
+                    <td>{{ each_pokemon.name }}</td>
+                    <td>{% for type in each_pokemon.types.all %}{{ type.name }} {%if not forloop.last %}/
                         {%endif%}{% endfor %}</td>
-                    <td> <img src="{{ pokemon.image_front }}" alt="pokemon photo"></td>
-                    <td><a href="{% url 'pokedex:details' pokemon.id%}" type="button"
+                    <td> <img src="{{ each_pokemon.image_front }}" alt="pokemon photo"></td>
+                    <td><a href="{% url 'pokedex:details' each_pokemon.id%}" type="button"
                             class="btn btn-success">details</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+    <nav>
+        <ul class="pagination">
+            {% if pokemon.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ pokemon.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="disabled"><a href="#!"><i class="page-link">&laquo;</i></a></li>
+            {% endif %}
+
+            {% if pokemon.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ pokemon.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="disabled"><a href="#!"><i class="page-link">&raquo;</i></a></li>
+            {% endif %}
+        </ul>
+    </nav>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

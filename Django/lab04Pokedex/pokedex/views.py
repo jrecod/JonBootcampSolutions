@@ -2,11 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import PokemonType, Pokemon
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 def index(request):
     pokemon = Pokemon.objects.all()
     pokemon_type = PokemonType.objects.all()
     search = request.GET.get('search', '')
+    print(search)
     if search !='':
         pokemon = pokemon.filter(Q(name__icontains=search))
 
@@ -15,7 +17,6 @@ def index(request):
     paginator = Paginator(pokemon, pokemon_per_page)
     poke_page = paginator.page(page_number)
     context = {
-        'pokemons': pokemon,
         'pokemon': poke_page,
         'search': search,
     }
