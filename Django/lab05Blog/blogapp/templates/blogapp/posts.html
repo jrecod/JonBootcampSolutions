@@ -1,10 +1,7 @@
 {% extends 'blogapp/boilerplate.html' %}
 
 {% block content %}
-<h1>Hello {{user.username}}!</h1>
-<form action="{% url 'blogapp:create' %}">
-    <button type="submit" class="btn btn-success">Create new blog post</button>
-</form>
+<h1>Take a look at some other Dog Blogs!</h1>
 <table class="table table-dark">
     <thead>
         <tr>
@@ -17,7 +14,7 @@
         <tr>
             <td>{{post.title}}</td>
             <td>{{post.date_created}}</td>
-            <td><a href="{% url 'blogapp:edit' post.id %}"><button type="submit" class="btn btn-primary">Edit</button></a></td>
+            <td><a href="{% url 'blogapp:details' post.id %}"><button type="submit" class="btn btn-primary">Details</button></a></td>
         </tr>
         {% endfor %}
     </tbody>

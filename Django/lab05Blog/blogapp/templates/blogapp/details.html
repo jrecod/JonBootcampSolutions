@@ -1,0 +1,26 @@
+{% extends 'blogapp/boilerplate.html' %}
+
+
+{% block content %}
+
+<h1>Details</h1>
+<div class="col">
+    <div class="container">
+        <div class="row">
+            <div class="col">User: {{post.user}} </div>
+            <div class="col">Date Posted: {{ post.date_created }}</div>
+        </div>
+        <div class="row">
+            <div class="col">Image:</div>
+            <div class="col">{{post.image}}</div>
+        </div>
+        <div class="row">
+            <div class="col">Post:</div>
+            <div class="col">{{post.body}}</div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

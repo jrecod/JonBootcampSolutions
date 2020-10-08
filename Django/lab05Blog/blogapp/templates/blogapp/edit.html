@@ -3,11 +3,14 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<h1>Make a blog post</h1>
 
+<h1>Edit</h1>
 <form method='post' enctype="multipart/form-data">
     {% csrf_token %}
     {{ form|crispy }}
-    <button type="submit" class="btn btn-info">Create Blog Post</button>
+    <button type="submit" class="btn btn-info">Save edit</button>
 </form>
+
+
+
 {% endblock %}

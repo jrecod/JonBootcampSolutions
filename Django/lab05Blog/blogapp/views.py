@@ -1,9 +1,12 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from lab05Blog import localsettings
 from .forms import BlogForm
+from django.views.generic import CreateView
+from django.utils import timezone
+from .models import BlogPost
 import django.contrib.auth
 
 
@@ -67,22 +70,56 @@ def login(request):
 
 @login_required
 def profile(request):
-    return render(request, 'blogapp/profile.html')
+    # posts = BlogPost.objects.filter(user=request.user)
+    posts = request.user.blog_posts.all()
+    context = {
+        'posts': posts,
+    }
+    return render(request, 'blogapp/profile.html', context)
 
 @login_required
 def create(request):
-    model = BlogPost
-    # if request.method == 'POST':
-    #     form = BlogForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         post = form.save(commit=False)
-    #         post.user = request.user
-    #         post.save()
-    #         return HttpResponseRedirect(reverse('blogapp:profile'))
-    # else:
-    #     form = BlogForm()
-    # context = {
-    #     'form': form
-    # }
-    # return render(request, 'blogapp/create.html', context)
-    
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.date_created = timezone.now()
+            post.user = request.user
+            post.save()
+            return HttpResponseRedirect(reverse('blogapp:profile'))
+    else:
+        form = BlogForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'blogapp/create.html', context)
+
+@login_required
+def edit(request, post_id):
+    post = get_object_or_404(BlogPost, id=post_id, user=request.user)
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('blogapp:profile'))
+    else:
+        form = BlogForm(instance=post)
+    context = {
+        'form': form
+    }
+    return render(request, 'blogapp/edit.html', context)
+        
+@login_required
+def posts(request):
+    posts = BlogPost.objects.all()
+    context = {
+        'posts': posts,
+    }
+    return render(request, 'blogapp/posts.html', context)
+
+def details(request, post_id):
+    post = get_object_or_404(BlogPost, id=post_id)
+    context = {
+        'post': post
+    }
+    return render(request, 'blogapp/details.html', context)
