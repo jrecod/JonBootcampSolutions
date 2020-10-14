@@ -12,10 +12,10 @@ def index(request):
     return render(request, 'Libraryapp/index.html', context)
 
 def search(request):
-    books = Book.objects.all()
+    books = Book.objects.all().order_by('title')
     text = request.GET.get('text', '')
     if text != '':
-        books = Book.objects.filter(Q(title__icontains=text))
+        books = Book.objects.filter(Q(title__icontains=text)).order_by('title')#add author
     page = request.GET.get('page', 1)
     books_per_page = 5
     pagintor = Paginator(books, books_per_page)
