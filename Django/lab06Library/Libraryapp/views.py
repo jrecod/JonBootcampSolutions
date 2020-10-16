@@ -15,7 +15,9 @@ def search(request):
     books = Book.objects.all().order_by('title')
     text = request.GET.get('text', '')
     if text != '':
-        books = Book.objects.filter(Q(title__icontains=text)).order_by('title')#add author
+        books = Book.objects.filter(Q(title__icontains=text)
+                                    |Q(author__icontains=text)).order_by('title')
+
     page = request.GET.get('page', 1)
     books_per_page = 5
     pagintor = Paginator(books, books_per_page)
