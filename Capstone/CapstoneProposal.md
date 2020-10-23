@@ -55,7 +55,7 @@ About me will be a simple page that will have my clients name, portrait and bio.
 
 #### Notes
 
-rich text editor for blog posts ckeditor tinymce(https://djangopackages.org/grids/g/wysiwyg/)
+rich text editor for blog posts: tinymce
 
 Tag blog post w/ type(fashion, health & fitness, food...etc). Many to many. (think types with pokedex)
 

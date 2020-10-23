@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Document</title>
+    
+</head>
+
+
+<body>
+    {% load materializecss %}
+
+
+
+    <div class=container>
+        <h1>Create new post</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form|materializecss }}
+            <button class="btn waves-effect waves-light" type="submit" name="action">Create
+                <i class="material-icons right">send</i></button>
+        </form>
+    </div>
+
+
+
+
+    <script>
+        $(document).ready(function () {
+
+            // Initialize materialize data picker
+            // $('.datepicker').datepicker({ 'format': 'yyyy-mm-dd' });
+            $('select').formSelect();
+
+        });
+    </script>
+</body>
