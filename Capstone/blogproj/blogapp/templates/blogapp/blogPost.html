@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>{{ post.title }}</title>
+    <style>
+        .body-overflow {
+            overflow: auto;
+            max-height: 600px;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        .post-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .nav-wrapper {
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{% url 'blogapp:home' %}"
+                class="brand-logo center">ALLSHAPES/{% for category in post.categories.all %}{{category.name}}{% if not forloop.last %}/{%endif%}{% endfor %}</a>
+            <a href="" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+
+    <!-- side menu for mobile -->
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="">
+                </div>
+            </div>
+        </li>
+        <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+        <li><a href="#!">Second Link</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    </ul>
+
+    <main>
+        <div class="container">
+            <div class="row" id="title">
+                <h1>{{post.title}}</h1>
+            </div>
+            <div class="row">
+                <div class="col l7 s12">
+                    {% if post.image %}
+                    <img class="post-image" src="{{post.image.url}}">
+                    {% endif %}
+                </div>
+                <div class="col l5 s12 body-overflow">
+                    {{post.body|safe}}
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <div id="disqus_thread"></div>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col s4">
+                    <h5 class="white-text">Newsletter</h5>
+                    <a class="grey-text text-lighten-3" href="https://mailchi.mp/33a744da0f70/allshapes"
+                        target="_blank">Subscribe</a>
+                </div>
+                <div class="col s4">
+                    <a href="{% url 'blogapp:about' %}">
+                        <h5 class="white-text">About</h5>
+                    </a>
+                </div>
+                <div class="col s4">
+                    <h5 class="white-text">Keep in Touch</h5>
+                    <div class="row">
+                        <a href="" class="waves-effect pulse btn-floating indigo darken-3">
+                            <i class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2020 Copyright
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+
+        /**
+        *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+        *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+        var disqus_config = function () {
+            this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = {{ post.id }}
+        }; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        (function () { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://allshapes.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+
+</body>
+
+</html>

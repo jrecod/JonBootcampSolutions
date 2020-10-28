@@ -8,20 +8,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>ALLSHAPES/HOME</title>
+    <style>
+        .dropdown-content li{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* margin-top: 10px; */
+            overflow: hidden;
+        }
+        .dropdown-content li>a{
+           padding: 8px;
+        }
+    </style>
 </head>
 
 <body>
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="" class="waves-effect pulse btn-floating indigo darken-3">
+            <i class="fa fa-instagram"></i></a></li>
+      </ul>
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo center">ALLSHAPES</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="">About</a></li>
-                <li><a href="badges.html">Newsletter</a></li>
+                <li><a href="{% url 'blogapp:about' %}">About</a></li>
+                <li><a target="_blank" href="https://mailchi.mp/33a744da0f70/allshapes">Newsletter</a></li>
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Keep in touch<i
-                            class="material-icons right">arrow_drop_down</i></a></li> <!-- no drop down arrow?  -->
+                            class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
         </div>
     </nav>
@@ -47,7 +66,8 @@
 
 </body>
 <script>
-    $(".dropdown-trigger").dropdown();//where is the drop down arrow?
+    // $( document ).ready(function)
+    $(".dropdown-trigger").dropdown();
 </script>
 
 </html>

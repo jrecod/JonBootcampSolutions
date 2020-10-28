@@ -14,7 +14,7 @@ class BlogPost(models.Model):
     body = models.TextField()
     image = models.ImageField(blank=True, null=True, upload_to='blog_post_images/')
     date_created = models.DateTimeField(auto_now_add=True)
-    category = models.ManyToManyField(Category, related_name='blog_posts')
+    categories = models.ManyToManyField(Category, related_name='blog_posts')
     description = models.CharField(blank=True, max_length=200)
 
     def __str__(self):

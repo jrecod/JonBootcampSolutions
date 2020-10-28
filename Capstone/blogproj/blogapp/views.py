@@ -16,16 +16,20 @@ def home(request):
 
 def category(request, path_name):
     category = Category.objects.get(path_name=path_name)
-    posts = category.blog_posts.all()
-    # posts = BlogPost.objects.filter(category_id=category_id)
+    posts = category.blog_posts.all().order_by('-date_created')
     context = {
-        'posts' : posts
+        'posts' : posts,
+        'category': category,
     }
     return render(request, 'blogapp/category.html', context)
 
 def blog_post(request, post_id):
-    pass 
+    post = BlogPost.objects.get(id=post_id)
+    context = {
+        'post' : post
+    }
+    return render(request, 'blogapp/blogPost.html', context)
 
 def about_me(request):
-    pass
+   return render(request, 'blogapp/about.html')
 
