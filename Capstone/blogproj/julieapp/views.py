@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from blogapp.models import BlogPost, Category
+from django.db.models import Q
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -30,8 +31,14 @@ def logout_request(request):
 @login_required
 def dashboard(request):
     posts = BlogPost.objects.all().order_by('-date_created')
+    search = request.GET.get('search', '')
+    category = request.GET.get('category', '')
+    if search !='' or category!='':
+        posts = posts.filter(Q(title__icontains=search)
+                             & Q(categories__name__icontains=category))
     context = {
-        'posts': posts
+        'posts': posts,
+        "search": search
     }
     return render(request, 'julieapp/dashboard.html', context)
 

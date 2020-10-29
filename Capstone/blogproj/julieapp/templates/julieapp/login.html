@@ -12,13 +12,33 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Blog Login</title>
     <style>
+        body{
+            background-color: tan;
+        }
         .login-card {
-            position: relative;
+            position: absolute;
             left: 50%;
-            top: 0%;
-            transform: translate(-50%,50%);
+            top: 50%;
+            transform: translate(-50%,-50%);
             width: 30%;
             min-width: 400px;
+            
+        }
+        .login-card .card-content{
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .login-card label{
+            font-size: 16px;
+            color: seashell;
+        }
+        .login-card input{
+            font-size: 20px !important;
+            color: seashell;
+        }
+        .card{
+            background-color: transparent;
         }
     </style>
 </head>
@@ -26,7 +46,7 @@
 <body>
     <div class="login-card col s12 ">
         <div class="card hoverable">
-            <div class="card-action">
+            <div class="card-action brown white-text">
                 <h3>Login</h3>
             </div>
             <form class="card-content" method="post">

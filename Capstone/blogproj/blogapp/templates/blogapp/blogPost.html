@@ -44,7 +44,7 @@
     <nav>
         <div class="nav-wrapper">
             <a href="{% url 'blogapp:home' %}"
-                class="brand-logo center">ALLSHAPES/{% for category in post.categories.all %}{{category.name}}{% if not forloop.last %}/{%endif%}{% endfor %}</a>
+                class="brand-logo center">ALLSHAPES • {% for category in post.categories.all %}{{category.name}}{% if not forloop.last %}/{%endif%}{% endfor %}</a>
             <a href="" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>
     </nav>
@@ -85,9 +85,10 @@
         </div>
     </main>
 
-
+    <div class="container">
     <div id="disqus_thread"></div>
-
+    </div>
+    
     <footer class="page-footer">
         <div class="container">
             <div class="row">
@@ -113,7 +114,6 @@
         <div class="footer-copyright">
             <div class="container">
                 © 2020 Copyright
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
             </div>
         </div>
     </footer>

@@ -15,15 +15,16 @@
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <title>ALLSHAPES/HOME</title>
     <style>
-        .dropdown-content li{
+        .dropdown-content li {
             display: flex;
             align-items: center;
             justify-content: center;
             /* margin-top: 10px; */
             overflow: hidden;
         }
-        .dropdown-content li>a{
-           padding: 8px;
+
+        .dropdown-content li>a {
+            padding: 8px;
         }
     </style>
 </head>
@@ -31,8 +32,8 @@
 <body>
     <ul id="dropdown1" class="dropdown-content">
         <li><a href="" class="waves-effect pulse btn-floating indigo darken-3">
-            <i class="fa fa-instagram"></i></a></li>
-      </ul>
+                <i class="fa fa-instagram"></i></a></li>
+    </ul>
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo center">ALLSHAPES</a>
@@ -42,15 +43,31 @@
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Keep in touch<i
                             class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
+            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>
     </nav>
+
+    <!-- side menu for mobile -->
+    <ul id="slide-out" class="sidenav">
+        <li><a href="{% url 'blogapp:about' %}">About</a></li>
+        <li><a target="_blank" href="https://mailchi.mp/33a744da0f70/allshapes">Newsletter</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li>
+            <h5>Follow us on Social</h5>
+        </li>
+        <li><a href="" class="waves-effect pulse btn-floating indigo darken-3">
+                <i class="fa fa-instagram"></i></a></li>
+    </ul>
+
     <div class="row">
         {% for category in categories %}
         <div class="col s6">
-            <div class="card">
+            <div class="card hoverable">
                 <div class="card-image">
                     {% if category.image %}
-                    <img src="{{category.image.url}}">
+                    <a href="{% url 'blogapp:category' category.path_name %}"><img src="{{category.image.url}}"></a>
                     {% endif %}
                 </div>
                 <div class="card-content">
@@ -64,10 +81,20 @@
         {% endfor %}
     </div>
 
+    <script>
+        // $( document ).ready(function)
+        $(".dropdown-trigger").dropdown();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, {});
+        });
+
+        // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+        // var collapsibleElem = document.querySelector('.collapsible');
+        // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+    </script>
 </body>
-<script>
-    // $( document ).ready(function)
-    $(".dropdown-trigger").dropdown();
-</script>
 
 </html>

@@ -32,23 +32,13 @@
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="{% url 'blogapp:home' %}" class="brand-logo center">ALLSHAPES/{{category.name}}</a>
+            <a href="{% url 'blogapp:home' %}" class="brand-logo center">ALLSHAPES • {{category.name}}</a>
             <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>
     </nav>
 
     <!-- side menu for mobile -->
     <ul id="slide-out" class="sidenav">
-        <li>
-            <div class="user-view">
-                <div class="background">
-                    <img src="images/office.jpg">
-                </div>
-                <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-                <a href="#name"><span class="white-text name">John Doe</span></a>
-                <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
-            </div>
-        </li>
         <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
         <li><a href="#!">Second Link</a></li>
         <li>
@@ -64,10 +54,10 @@
             <div class="row">
                 {% for post in posts %}
                 <div class="col s12 m7">
-                    <div class="card">
+                    <div class="card hoverable">
                         <div class="card-image">
                             {% if post.image %}
-                            <img src="{{post.image.url}}">
+                                <a href="{% url 'blogapp:post' post.id %}"><img src="{{post.image.url}}"></a>
                             {% endif %}
                         </div>
                         <div class="card-content">

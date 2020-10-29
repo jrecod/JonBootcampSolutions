@@ -10,43 +10,106 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <title>Document</title>
+    <title>Dashboard</title>
+    <style>
+        .search-button {
+            padding-top: 5px !important;
+        }
+    </style>
 </head>
 
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="" class="brand-logo center">Julie's Dashboard</a>
+            <a href="{% url 'julieapp:dashboard' %}" class="brand-logo center">ALLSHAPES • DASHBOARD</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="{% url 'julieapp:logout' %}">logout</a></li>
+                <li><a target="_blank" href="https://us2.admin.mailchimp.com/">Newsletter</a></li>
+                <li><a target="_blank" href="https://disqus.com/admin/">Disqus</a></li>
+                <li><a href="{% url 'julieapp:logout' %}">Logout</a></li>
             </ul>
             <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>
     </nav>
+    
+    <!-- side menu for mobile -->
+    <ul id="slide-out" class="sidenav">
+        <li><a target="_blank" href="https://us2.admin.mailchimp.com/">Newsletter</a></li>
+        <li><a target="_blank" href="https://disqus.com/admin/">Disqus</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a href="{% url 'julieapp:logout' %}">Logout</a></li>
+    </ul>
+
+    <div class="fixed-action-btn">
+        <a href="{% url 'julieapp:create' %}" class="btn-floating btn-large red">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
     <!-- blog post cards -->
-    <div class="container"> 
-        <a href="{% url 'julieapp:create' %}" class="waves-effect waves-light btn-small"><i class="material-icons left">add_circle</i>Create Blog Post</a>
+    <div class="container">
+        <form class="row" action="{% url 'julieapp:dashboard' %}" method="GET">
+            <div class="input-field col m8 s12">
+                <input class="search-bar" name="search" type="text" placeholder="Search">
+            </div>
+            <div class="input-field col m2 s8">
+                <select name="category">
+                    <option value="" disabled selected>Filter by category</option>
+                    <option value="confidence">Confidence</option>
+                    <option value="fashion">Fashion</option>
+                    <option value="health_fitness">Health + Fitness</option>
+                    <option value="skin_care">Skin Care</option>
+                </select>
+            </div>
+            <div class="input-field search-button col m2 s4">
+                <button class="btn" type="submit">Search</button>
+            </div>
+        </form>
+        {% for post in posts %}
         <div class="row">
-            {% for post in posts %}
             <div class="col s12 m7">
-                <div class="card">
+                <h4>{{ post.title }}</h4>
+                <div class="card horizontal hoverable">
                     <div class="card-image">
                         {% if post.image %}
                         <img src="{{post.image.url}}">
                         {% endif %}
                     </div>
-                    <div class="card-content">
-                        <p>{{post.description}}</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="{% url 'julieapp:edit' post.id %}" class="waves-effect waves-light btn-small"><i class="material-icons right">create</i>Edit Post</a>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <p><b>Category:</b>
+                                {% for category in post.categories.all %}{{category.name}}{% if not forloop.last %}/{%endif%}{% endfor %}
+                            </p><br>
+
+                            <p><b>Description:</b> {{post.description}}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="{% url 'julieapp:edit' post.id %}" class="waves-effect waves-light btn-small"><i
+                                    class="material-icons right">create</i>Edit Post</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            {% endfor %}
         </div>
+        {% endfor %}
     </div>
 
+    <script>document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems, {});
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, {});
+        });
+
+    // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
+    // var collapsibleElem = document.querySelector('.collapsible');
+    // var collapsibleInstance = M.Collapsible.init(collapsibleElem, options);
+    </script>
 </body>
 
 </html>
