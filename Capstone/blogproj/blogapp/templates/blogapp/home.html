@@ -13,8 +13,24 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css2?family=Dawning+of+a+New+Day&display=swap" rel="stylesheet">
+
     <title>ALLSHAPES/HOME</title>
+
     <style>
+        @media only screen and (max-width: 703px) {
+            .brand-logo {
+                white-space: nowrap;
+            }
+        }
+
+        @media only screen and (max-width: 419px) {
+            .card-action {
+                white-space: nowrap;
+            }
+        }
+
         .dropdown-content li {
             display: flex;
             align-items: center;
@@ -26,25 +42,117 @@
         .dropdown-content li>a {
             padding: 8px;
         }
+
         .slide-social {
-            padding-left: 10px;
+            padding: 0 32px !important;
+        }
+
+        .nav-wrapper {
+            background-color: rgb(251, 245, 239);
+            color: black;
+        }
+
+        body {
+            background-color: rgb(248, 237, 235);
+
+        }
+
+        .sidenav {
+            background-color: rgb(251, 245, 239);
+            color: black;
+        }
+
+        .sidenav li>a {
+            color: rgb(216, 163, 110) !important;
+        }
+
+        .dropdown-content {
+            background-color: rgb(251, 245, 239);
+
+        }
+
+        .dropdown-content li>span {
+            color: rgb(216, 163, 110) !important
+        }
+
+        .btn-floating {
+            background-color: rgb(216, 163, 110) !important;
+        }
+
+        p {
+            padding: 0 32px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .brand-logo {
+            font-family: 'Dawning of a New Day', cursive;
+            font-size: 53px !important;
+            margin-top: 4px;
+            color: rgb(216, 163, 110) !important;
+            font-weight: lighter !important;
+        }
+
+        nav {
+            height: 80px;
+        }
+
+        nav ul a {
+            display: block;
+            line-height: 80px;
+            color: rgb(216, 163, 110) !important;
+            font-size: 15px;
+        }
+
+        nav .dropdown-trigger i {
+            line-height: 80px !important;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: rgba(251, 245, 239, 0.75);
+        }
+
+        .card:hover .overlay {
+            opacity: 1;
+        }
+
+        .text {
+            font-family: 'Dawning of a New Day', cursive;
+            color: rgb(216, 163, 110);
+            font-size: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
     <ul id="dropdown1" class="dropdown-content">
-        <li><a href="" class="waves-effect pulse btn-floating indigo darken-3">
+        <li><a href="" class="waves-effect pulse btn-floating">
                 <i class="fa fa-instagram"></i></a></li>
     </ul>
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo center">ALLSHAPES</a>
+            <a href="#" class="brand-logo center">All Shapes</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="{% url 'blogapp:about' %}">About</a></li>
                 <li><a target="_blank" href="https://mailchi.mp/33a744da0f70/allshapes">Newsletter</a></li>
                 <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Keep in touch<i
-                            class="material-icons right">arrow_drop_down</i></a></li>
+                            class="material-icons  right">arrow_drop_down</i></a></li>
             </ul>
             <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
         </div>
@@ -58,33 +166,40 @@
             <div class="divider"></div>
         </li>
         <li>
-            <h5>Follow us on Social</h5>
-        </li>
+            <p>Social Media</p>
         <li>
-            <div class="slide-social"><a href="" class="waves-effect pulse btn-floating indigo darken-3">
+            <div class="slide-social"><a href="" class="waves-effect pulse btn-floating black">
                     <i class="fa fa-instagram"></i></a>
             </div>
         </li>
     </ul>
 
-    <div class="row">
-        {% for category in categories %}
-        <div class="col s6">
-            <div class="card hoverable">
-                <div class="card-image">
-                    {% if category.image %}
-                    <a href="{% url 'blogapp:category' category.path_name %}"><img src="{{category.image.url}}"></a>
-                    {% endif %}
-                </div>
-                <div class="card-content">
-                    <p>{{category.description}}</p>
-                </div>
-                <div class="card-action">
-                    <a href="{% url 'blogapp:category' category.path_name %}">{{category.name}}</a>
+    <div class="container">
+        <div class="row">
+            {% for category in categories %}
+            <div class="col s6">
+                <div class="card hoverable">
+                    <div class="card-image">
+                        {% if category.image %}
+                        <img src="{{category.image.url}}">
+                        <a href="{% url 'blogapp:category' category.path_name %}" class="overlay"> 
+                            <div class="text">
+                                
+                                {{category.name}}
+                            </div>
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="card-content">
+                        <p>{{category.description}}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{% url 'blogapp:category' category.path_name %}">{{category.name}}</a>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 
     <script>
@@ -94,7 +209,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems, {edge:'right'});
+            var instances = M.Sidenav.init(elems, { edge: 'right' });
         });
 
         // Initialize collapsible (uncomment the lines below if you use the dropdown variation)
