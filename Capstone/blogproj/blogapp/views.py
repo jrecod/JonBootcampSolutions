@@ -25,8 +25,13 @@ def category(request, path_name):
 
 def blog_post(request, post_id):
     post = BlogPost.objects.get(id=post_id)
+    categories = Category.objects.all()
+    for category in categories:
+        print(category.id)
+    print(categories)
     context = {
-        'post' : post
+        'post' : post,
+        'categories' : categories,
     }
     return render(request, 'blogapp/blogPost.html', context)
 

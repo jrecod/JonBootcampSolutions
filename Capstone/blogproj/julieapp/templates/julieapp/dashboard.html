@@ -15,6 +15,24 @@
         .search-button {
             padding-top: 5px !important;
         }
+        @media only screen and (max-width: 703px) {
+            .brand-logo {
+                white-space: nowrap;
+                font-size: 19px !important; 
+            }
+            h4 {
+                font-size: 20px;
+                white-space: nowrap;
+            }
+            p{
+                font-size: 12px;
+            }
+        }
+        @media only screen and (max-width: 1603px){
+            .view-post{
+                margin-top: 5px;
+            }
+        }
     </style>
 </head>
 
@@ -54,17 +72,17 @@
             </div>
             <div class="input-field col m2 s8">
                 <select name="category">
-                    <option value="" disabled selected>Filter by category</option>
-                    <option value="confidence">Confidence</option>
-                    <option value="fashion">Fashion</option>
-                    <option value="health_fitness">Health + Fitness</option>
-                    <option value="skin_care">Skin Care</option>
+                    <option value="">All categories</option>
+                    {% for category in categories %}
+                    <option {% if selected_category == category.name %} selected {% endif %}value="{{category.name}}">{{category.name}}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="input-field search-button col m2 s4">
                 <button class="btn" type="submit">Search</button>
             </div>
         </form>
+
         {% for post in posts %}
         <div class="row">
             <div class="col s12 m7">
@@ -72,7 +90,7 @@
                 <div class="card horizontal hoverable">
                     <div class="card-image">
                         {% if post.image %}
-                        <img src="{{post.image.url}}">
+                        <a target="_blank" href="{% url 'blogapp:post' post.id %}"><img src="{{post.image.url}}"></a>
                         {% endif %}
                     </div>
                     <div class="card-stacked">
@@ -86,6 +104,8 @@
                         <div class="card-action">
                             <a href="{% url 'julieapp:edit' post.id %}" class="waves-effect waves-light btn-small"><i
                                     class="material-icons right">create</i>Edit Post</a>
+                            <a target="_blank" href="{% url 'blogapp:post' post.id %}" class="waves-effect waves-light btn-small view-post"><i
+                                class="material-icons right">visibility</i>View Post</a>
                         </div>
                     </div>
                 </div>

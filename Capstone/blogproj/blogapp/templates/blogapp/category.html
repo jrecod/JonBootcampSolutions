@@ -14,6 +14,22 @@
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <title>{{category.name}}</title>
     <style>
+        
+        @media only screen and (max-width: 703px) {
+            .brand-logo {
+                white-space: nowrap;
+                font-size: 19px !important; 
+            }
+            h5 {
+                font-size: 16px;
+                white-space: nowrap;
+            }
+        }
+
+        .social-foot{
+            padding-left: .75rem;
+        }
+
         body {
             display: flex;
             min-height: 100vh;
@@ -23,8 +39,23 @@
         main {
             flex: 1 0 auto;
         }
+
         .nav-wrapper {
             text-transform: uppercase;
+        }
+
+        .card-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-floating i{
+            font-size: 2rem;
+        }
+
+        .slide-social {
+            padding-left: 10px;
         }
     </style>
 </head>
@@ -33,19 +64,25 @@
     <nav>
         <div class="nav-wrapper">
             <a href="{% url 'blogapp:home' %}" class="brand-logo center">ALLSHAPES • {{category.name}}</a>
-            <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
         </div>
     </nav>
 
     <!-- side menu for mobile -->
     <ul id="slide-out" class="sidenav">
-        <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-        <li><a href="#!">Second Link</a></li>
+        <li><a href="{% url 'blogapp:about' %}">About</a></li>
+        <li><a target="_blank" href="https://mailchi.mp/33a744da0f70/allshapes">Newsletter</a></li>
         <li>
             <div class="divider"></div>
         </li>
-        <li><a class="subheader">Subheader</a></li>
-        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+        <li>
+            <h5>Follow us on Social</h5>
+        </li>
+        <li>
+            <div class="slide-social"><a href="" class="waves-effect pulse btn-floating indigo darken-3">
+                    <i class="fa fa-instagram"></i></a>
+            </div>
+        </li>
     </ul>
 
     <!-- blog post cards -->
@@ -53,11 +90,11 @@
         <div class="container">
             <div class="row">
                 {% for post in posts %}
-                <div class="col s12 m7">
+                <div class="col s12 card-row">
                     <div class="card hoverable">
                         <div class="card-image">
                             {% if post.image %}
-                                <a href="{% url 'blogapp:post' post.id %}"><img src="{{post.image.url}}"></a>
+                            <a href="{% url 'blogapp:post' post.id %}"><img src="{{post.image.url}}"></a>
                             {% endif %}
                         </div>
                         <div class="card-content">
@@ -87,7 +124,7 @@
                 </div>
                 <div class="col s4">
                     <h5 class="white-text">Keep in Touch</h5>
-                    <div class="row">
+                    <div class="row social-foot">
                         <a href="" class="waves-effect pulse btn-floating indigo darken-3">
                             <i class="fa fa-instagram"></i></a>
                     </div>
@@ -106,7 +143,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var elems = document.querySelectorAll('.sidenav');
-            var instances = M.Sidenav.init(elems, {});
+            var instances = M.Sidenav.init(elems, {edge:'right'});
         });
 
         // Initialize collapsible (uncomment the lines below if you use the dropdown variation)

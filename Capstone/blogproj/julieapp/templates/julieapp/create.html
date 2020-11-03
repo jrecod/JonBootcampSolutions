@@ -21,7 +21,11 @@
             selector: '#mytextarea'
         });
     </script>
-
+    <style>
+        .fixed-action-btn{
+            top: 0px;
+        }
+    </style>
 </head>
 
 
@@ -40,7 +44,11 @@
         </form>
     </div>
 
-
+    <div class="fixed-action-btn">
+        <a href="{% url 'julieapp:dashboard' %}" class="btn-floating btn-small red">
+            <i class="large material-icons">close</i>
+        </a>
+    </div>
 
 
     <script>
@@ -51,8 +59,12 @@
             $('select').formSelect();
 
         });
-    </script>
-    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.fixed-action-btn');
+            var instances = M.FloatingActionButton.init(elems, options);
+        });
+
         tinymce.init({
             selector: 'textarea',
             plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',

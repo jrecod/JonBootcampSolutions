@@ -32,13 +32,16 @@ def logout_request(request):
 def dashboard(request):
     posts = BlogPost.objects.all().order_by('-date_created')
     search = request.GET.get('search', '')
-    category = request.GET.get('category', '')
+    category = request.GET.get('category', '')        
+    categories = Category.objects.all()
     if search !='' or category!='':
         posts = posts.filter(Q(title__icontains=search)
                              & Q(categories__name__icontains=category))
     context = {
         'posts': posts,
-        "search": search
+        "search": search,
+        "categories": categories,
+        "selected_category": category,
     }
     return render(request, 'julieapp/dashboard.html', context)
 
