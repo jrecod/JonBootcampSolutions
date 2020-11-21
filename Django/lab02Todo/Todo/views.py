@@ -8,7 +8,6 @@ def index(request):
         'todo_items' : todo_items
     }
     return render(request, 'Todo/index.html', context)
-# Create your views here.
 
 def submit(request):
     task = request.POST['task']
@@ -16,7 +15,7 @@ def submit(request):
     create_todo.save()
 
     return HttpResponseRedirect(reverse('Todo:index'))
-   
+
 
 # request.POST = {
 #     'task': user-input/input-value

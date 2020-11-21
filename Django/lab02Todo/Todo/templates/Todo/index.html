@@ -13,6 +13,9 @@
         form {
             margin: 35 px;
         }
+        ul button[type=checkbox]:checked{
+            text-decoration: line-through;
+        }
     </style>
     <title>Todo List</title>
 </head>
@@ -36,11 +39,15 @@
                 <button type="submit" class="btn btn-success">Add Task</button>
             </div>
         </form>
+    </div>
+    <div class="container">
+        {% for todo_item in todo_items %}
         <ul>
-            {% for todo_item in todo_items %}
-            <li>{{ todo_item.task }}</li>
-            {% endfor %}
+            <button type="checkbox" id="complete" class="btn btn-success">Complete</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
+            {{ todo_item.task }}
         </ul>
+        {% endfor %}
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

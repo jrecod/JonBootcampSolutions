@@ -34,40 +34,26 @@
                         v-model="question.selected_answer" :disabled="question.submitted">
                     <label class="form-check-label" v-bind:for="'question' + index + '_answer' + index_answer"
                         v-html="answer.text"></label>
+                    </div>
                 </div>
             </div>
+            <div class="row">
+                <button type="button" class="btn btn-primary btn-sm" id="check_answer" v-on:click="checkAnswers">
+                    Check Answers
+                </button>
+            </div>
         </div>
-        <div><button type="button" class="btn btn-primary btn-sm" id="check_answer" v-on:click="checkAnswers">
-                Check Answers
-            </button></div>
-    </div>
-    <script>
+        <script>
+        function shuffle(array) {
+            array.sort(() => Math.random() - 0.5);
+        }
+
         let app = new Vue({
             el: '#app',
             data: {
                 questions: [],
             },
             methods: {
-                checkAnswers: function () {
-                    alert("check")
-                },
-                randAnswer: function () {
-                    //1. iterate over questions array
-                    //2. for each question, iterate over the answers
-                    //3. shuffle answers
-                    // for (let i = 0; i < this.questions.length; ++i){
-                    //     for (let i = 0; i < this.questions.length; ++i)
-                    // }
-                    //~~~~~~~VVVVV Does not work VVVVV~~~~~~~
-                    // for (let i = 0; i < this.questions.length; ++i) {
-                    //     let arr = this.questions[i].answers
-                    //     let q = Math.floor(Math.random() * arr.length)
-
-                    //     let temp = arr[i]
-                    //     arr[i] = arr[q]
-                    //     arr[q] = temp
-                    // }
-                },
                 getQuiz: function () {
                     axios({
                         method: 'get',
@@ -105,6 +91,7 @@
                                     correct: false
                                 },
                             ]
+                            
                             temp_question.category = category
                             temp_question.type = type
                             temp_question.difficulty = difficulty
@@ -113,6 +100,7 @@
                             temp_question.selected_answer = null
                             temp_question.submitted = false
                             this.questions.push(temp_question)
+                            shuffle(answers)
                         }
                         // this.randAnswer()
                         console.log(JSON.parse(JSON.stringify(this.questions)))
@@ -121,7 +109,18 @@
                         // console.log(this.questions[0].incorrect_answers)
                         // console.log(this.questions[0].correct_answer)
                     })
-                }
+                },
+                checkAnswers: function () {
+                    let correctAnswers = 0;
+                    this.questions.forEach( (selected_answer, question) => {
+    
+                        if(this.selected_answer === true){
+                            this.correctAnswers++;
+                        }
+                    });
+                    alert(correctAnswers)
+                    console.log(correctAnswers)
+                },
             },
             created: function () {
                 this.getQuiz()
@@ -129,12 +128,12 @@
         })
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
 </body>

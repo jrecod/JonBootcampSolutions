@@ -2,6 +2,12 @@
 
 
 {% block content %}
+<style>
+    img{
+        height: 200px;
+        width: auto;
+    }
+</style>
 
 <h1>Details</h1>
 <div class="col">
@@ -12,7 +18,9 @@
         </div>
         <div class="row">
             <div class="col">Image:</div>
-            <div class="col">{{post.image}}</div>
+            {% if post.image %}
+            <div class="col post-image"><img src="{{post.image.url}}"></div>
+            {% endif %}
         </div>
         <div class="row">
             <div class="col">Post:</div>
